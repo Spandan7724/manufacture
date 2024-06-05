@@ -1,8 +1,8 @@
 Metadata-Version: 2.1
 Name: manufacture
-Version: 0.1
+Version: 0.2
 Summary: A simple command-line tool to create files.
-Home-page: https://github.com/yourusername/manufacture
+Home-page: https://github.com/Spandan7724/manufacture.git
 Author: Spandan Chavan
 Author-email: spandanchavan727477@gmail.com
 Classifier: Programming Language :: Python :: 3

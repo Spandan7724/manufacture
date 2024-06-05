@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="manufacture",
-    version="0.1",
+    version="0.3",
     packages=find_packages(),
     entry_points={
         'console_scripts': [
@@ -11,7 +11,7 @@ setup(
     },
     author="Spandan Chavan",
     author_email="spandanchavan727477@gmail.com",
-    description="A simple command-line tool to create files.",
+    description="A simple command-line tool to create and manage files.",
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",
     url="https://github.com/Spandan7724/manufacture.git",
