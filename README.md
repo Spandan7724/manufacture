@@ -1,6 +1,6 @@
 # Manufacture
 
-Manufacture is a simple command-line tool to create files with the specified name and type.
+Manufacture is a simple command-line tool to manage and create files with the specified name and type.
 
 ## Installation
 
