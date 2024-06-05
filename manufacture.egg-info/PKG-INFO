@@ -1,7 +1,7 @@
 Metadata-Version: 2.1
 Name: manufacture
-Version: 0.2
-Summary: A simple command-line tool to create files.
+Version: 0.3
+Summary: A simple command-line tool to create and manage files.
 Home-page: https://github.com/Spandan7724/manufacture.git
 Author: Spandan Chavan
 Author-email: spandanchavan727477@gmail.com
@@ -10,6 +10,7 @@ Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
 Requires-Python: >=3.6
 Description-Content-Type: text/markdown
+License-File: LICENSE
 
 # Manufacture
 
