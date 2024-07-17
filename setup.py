@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="manufacture",
-    version="0.5.8",
+    version="0.5.9",
     packages=find_packages(),
     entry_points={
         'console_scripts': [
