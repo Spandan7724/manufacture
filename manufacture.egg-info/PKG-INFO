@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: manufacture
-Version: 0.5.9
+Version: 0.6.1
 Summary: A simple command-line tool to create and manage files.
 Home-page: https://github.com/Spandan7724/manufacture.git
 Author: Spandan Chavan
@@ -67,7 +67,14 @@ manufacture -i <filename>
 # Compress a directory
 manufacture compress <directory> --output=<output>
 manufacture -z <directory> --output=<output>
+
+# Create directories and add content to them
+manufacture create_with_content create_with_content <dirname> -c <file>... -d <dirname>... [-cc <dirname> -c <file>... -d <dirname>...] 
+manufacture -cc -cc <dirname> -c <file>... -d <dirname>... [-cc <dirname> -c <file>... -d <dirname>...]
 ```
+
+
+
 
 ## Examples
 
@@ -111,5 +118,10 @@ Compress a directory:
 ```bash
 manufacture compress my_project --output=my_project.zip
 manufacture -z my_project --output=my_project.zip
+```
+
+Create dir1 with files main.py, test.go and a subdirectory frontend, and create dir2 with a subdirectory backend and files start.rs, docs.txt
+```bash
+manufacture -cc dir1 -c main.py test.go -d frontend -cc dir2 -d backend -c start.rs docs.txt
 ```
 

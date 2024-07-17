@@ -73,6 +73,18 @@ def compress_directory(directory, output):
     print(f"Compressed {directory} to {output}.zip")
 
 
+def create_with_content(dir_content_map):
+    for directory, contents in dir_content_map.items():
+        Path(directory).mkdir(parents=True, exist_ok=True)
+        print(f"Created directory {directory}")
+        for content in contents:
+            content_path = Path(directory) / content
+            if content_path.suffix:
+                create_file([str(content_path)])
+            else:
+                create_directory([str(content_path)])
+
+
 def parse_args(args):
     command_map = {
         'create': 'c',
@@ -83,9 +95,10 @@ def parse_args(args):
         'directory': 'd',
         'info': 'i',
         'compress': 'z',
+        'create_with_content': 'cc'
     }
     parsed_args = {'command': None, 'filenames': [], 'content': None, 'newname': None,
-                   'backup': False, 'permissions': None, 'owner': None, 'group': None, 'output': None}
+                   'backup': False, 'permissions': None, 'owner': None, 'group': None, 'output': None, 'dir_content_map': {}}
     if len(args) >= 1:
         command = args[0]
         for long_cmd, short_cmd in command_map.items():
@@ -117,6 +130,28 @@ def parse_args(args):
         elif parsed_args['command'] == 'compress':
             parsed_args['filenames'] = [args[1]]
             parsed_args['output'] = args[2][len("--output="):]
+        elif parsed_args['command'] == 'create_with_content':
+            current_dir = None
+            contents = []
+            i = 1
+            while i < len(args):
+                arg = args[i]
+                if arg in ['-cc', 'create_with_content']:
+                    if current_dir is not None:
+                        parsed_args['dir_content_map'][current_dir] = contents
+                    current_dir = args[i + 1]
+                    contents = []
+                    i += 2
+                elif arg == '-c' or arg == '-d':
+                    j = i + 1
+                    while j < len(args) and not args[j].startswith('-'):
+                        contents.append(args[j])
+                        j += 1
+                    i = j
+                else:
+                    i += 1
+            if current_dir is not None:
+                parsed_args['dir_content_map'][current_dir] = contents
         else:
             print("Unknown command")
             sys.exit(1)
@@ -139,6 +174,7 @@ def main():
             "  directory, -d <dirname>... : Create directories\n"
             "  info, -i <filename> : Display file metadata\n"
             "  compress, -z <directory> --output=<output> : Compress directory\n"
+            "  create_with_content, -cc -cc <dirname> -c <file>... -d <dirname>... : Create directories and add content\n"
         )
         sys.exit(1)
 
@@ -152,6 +188,7 @@ def main():
     owner = parsed_args['owner']
     group = parsed_args['group']
     output = parsed_args['output']
+    dir_content_map = parsed_args['dir_content_map']
 
     if command == "create":
         create_file(filenames)
@@ -169,6 +206,8 @@ def main():
         display_metadata(filenames[0])
     elif command == "compress":
         compress_directory(filenames[0], output)
+    elif command == "create_with_content":
+        create_with_content(dir_content_map)
     else:
         print(f"Unknown command: {command}")
         sys.exit(1)
